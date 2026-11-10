@@ -1,16 +1,38 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Animator anim;
+    [SerializeField] private float meleeSpeed;
+    [SerializeField] private float damage;
 
-    // Update is called once per frame
-    void Update()
+    float timeUntilMelee;
+    private void Update()
     {
-        
+        Vector3 cursor = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 direction = (Vector2)(cursor - anim.transform.position);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        anim.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        if (timeUntilMelee <=0f)
+        {
+            if(Mouse.current?.leftButton.wasPressedThisFrame == true)
+            {
+                anim.SetTrigger("Attack");
+                timeUntilMelee = meleeSpeed;
+            }
+        }
+        else
+        {
+            timeUntilMelee -= Time.deltaTime;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Enemy")
+        {
+            //other.Getcomponent<enemy>().TakeDamage(damage)
+            Debug.Log("Enemy Hit");
+        }
     }
 }

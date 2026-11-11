@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     private GameObject EnemyPrefab;
 
     [SerializeField]
-    private float EnemyInterval = 15f;
+    private float EnemyInterval = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

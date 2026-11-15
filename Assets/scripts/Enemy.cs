@@ -7,11 +7,13 @@ public class Enemy : MonoBehaviour
 
     private Transform player;
     private Rigidbody2D body;
+    private EXPsystem expSystem;
 
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player")?.transform;
+        expSystem = FindAnyObjectByType<EXPsystem>();
     }
 
     private void FixedUpdate()
@@ -39,9 +41,9 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0f)
         {
+            expSystem.AddEXP(10);
             Destroy(gameObject);
             Debug.Log("Enemy Died!");
-
         }
     }
 }

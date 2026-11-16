@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Object.FindFirstObjectByType<GameManager>().TriggerGameOVer();
             Debug.Log("Player died!");
             Destroy(collision.gameObject);
         }

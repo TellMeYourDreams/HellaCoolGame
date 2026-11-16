@@ -5,6 +5,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private float meleeSpeed;
     [SerializeField] private float damage;
+    public void AddDamage(float amount)
+    {
+        damage += amount;
+    }
 
     float timeUntilMelee;
     private void Update()

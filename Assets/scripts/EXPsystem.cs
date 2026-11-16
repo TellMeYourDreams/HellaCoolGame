@@ -11,6 +11,7 @@ public class EXPsystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI expText;
 
     int reqEXP = 20, totalEXP = 0, currentLVL = 0;
+    [SerializeField] private PlayerAttack playerAttack;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +34,7 @@ public class EXPsystem : MonoBehaviour
         while (totalEXP >= reqEXP)
         {
             currentLVL++;
+            playerAttack.AddDamage(10f);
             totalEXP = totalEXP - reqEXP;
             UpdateLVL();
         }

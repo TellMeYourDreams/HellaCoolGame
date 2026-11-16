@@ -35,6 +35,10 @@ public class Enemy : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+    public void AddSpawnHealth(float bonus)
+    {
+        health += bonus;
+    }
     public void TakeDamage(float damage)
 
     {

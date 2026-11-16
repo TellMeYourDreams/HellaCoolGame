@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78832ebeef2eeec44967e55e60efb0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  timeValue: 90
+  timeValue: 180
   timeText: {fileID: 988097875}
 --- !u!1 &266417505
 GameObject:
@@ -18558,6 +18558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameOverScreen: {fileID: 366026469}
+  resultText: {fileID: 1236995916}
 --- !u!4 &1675633115
 Transform:
   m_ObjectHideFlags: 0

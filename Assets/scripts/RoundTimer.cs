@@ -1,31 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    public float timeValue = 90;
+    public float timeValue = 180f;
     public Text timeText;
-    void Update()
+
+    private void Update()
     {
-        if(timeValue > 0)
-                {
-            timeValue -= Time.deltaTime;
-        }
-        else
+        if (timeText == null || Time.timeScale == 0f)
         {
-            timeValue = 0;
+            return;
         }
+
+        timeValue = Mathf.Max(0f, timeValue - Time.deltaTime);
         DisplayTime(timeValue);
-    }
-    void DisplayTime(float timeToDisplay)
-    {
-        if (timeToDisplay < 0)
+
+        if (timeValue == 0f)
         {
-            timeToDisplay = 0;
+            Object.FindFirstObjectByType<GameManager>().ShowResult("You survived!");
         }
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void DisplayTime(float timeToDisplay)
+    {
+        int totalSeconds = Mathf.CeilToInt(timeToDisplay);
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+
+        timeText.text = $"{minutes:00}:{seconds:00}";
     }
 }

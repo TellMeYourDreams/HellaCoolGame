@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
-using Unity.Collections.Tests.CoreCLR.TestJobs;
 
 public class EXPsystem : MonoBehaviour
 {

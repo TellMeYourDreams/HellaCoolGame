@@ -9614,3 +9614,5 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+  health: 10
+  moveSpeed: 5.1

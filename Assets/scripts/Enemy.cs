@@ -6,18 +6,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private ParticleSystem enemyParticleSystem;
     [SerializeField] private ParticleSystem enemy2ParticleSystem;
-    [SerializeField] private ParticleSystem playerParticleSystem;
-    [SerializeField] private ParticleSystem player2ParticleSystem;
-
+    
     private Transform player;
     private Rigidbody2D body;
     private EXPsystem expSystem;
+    private HealthManager healthManager;
 
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player")?.transform;
         expSystem = FindAnyObjectByType<EXPsystem>();
+        healthManager = FindAnyObjectByType<HealthManager>();
     }
 
     private void FixedUpdate()
@@ -34,15 +34,16 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerParticleSystem.transform.position = this.transform.position;
-            player2ParticleSystem.transform.position = this.transform.position;
-            playerParticleSystem.transform.parent = null;
-            player2ParticleSystem.transform.parent = null;
-            playerParticleSystem.Play();
-            player2ParticleSystem.Play();
-            Object.FindFirstObjectByType<GameManager>().TriggerGameOVer();
-            Debug.Log("Player died!");
-            Destroy(collision.gameObject);
+            healthManager.TakeDMG(50);
+            expSystem.AddEXP(10);
+            enemyParticleSystem.transform.position = this.transform.position;
+            enemy2ParticleSystem.transform.position = this.transform.position;
+            enemyParticleSystem.transform.parent = null;
+            enemy2ParticleSystem.transform.parent = null;
+            enemyParticleSystem.Play();
+            enemy2ParticleSystem.Play();
+            Debug.Log("Enemy Died!");
+            Destroy(this.gameObject);
         }
     }
     public void AddSpawnHealth(float bonus)
@@ -63,8 +64,8 @@ public class Enemy : MonoBehaviour
             enemy2ParticleSystem.transform.parent = null;
             enemyParticleSystem.Play();
             enemy2ParticleSystem.Play();
-            Destroy(gameObject);
             Debug.Log("Enemy Died!");
+            Destroy(gameObject);
         }
     }
 }
